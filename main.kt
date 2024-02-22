@@ -1,31 +1,81 @@
 var accountBalance = 0
 var userChoice = 0 
 
+fun userChoice1(){
+  do {
+    println("Please select the preferred option ")
+    println("1. Deposit money ")
+    println("2. Withdraw money ")
+    println("Press any other key to Exit")
+  
+    var userChoice1 : Int = readln().toInt()
+  
+    println("The selected option is $userChoice1, ")
+  
+    when (userChoice1){
+      1 -> deposit(userChoice)
+      2 -> withdraw(userChoice)
+      else -> break
+    } 
+    }
+     while (userChoice1 !in 1..2 );  
+    println("Thankyou for using the banking system.")
+
+}
+
 fun withdraw(userChoice : Int ){
-  println("Enter the amount you want to withdraw ")
+  println("Enter the amount you want to withdraw, ")
   var amount = readln().toInt()
 
   while(userChoice == 1 && amount>accountBalance)
   {
     println("error balance not enough")
     println("Account balance is $accountBalance")
-    println("please enter valid amount")
-    amount = readln().toInt()
+    userChoice1()
   }
-    
-  accountBalance -= amount
+  
+  if (userChoice == 2){
+  accountBalance += amount
   println("$amount withdrawn from the account")
   println("Account balance is $accountBalance")
+  userChoice1()
+  }else {
+    accountBalance -= amount
+    println("$amount withdrawn from the account")
+    println("Account balance is $accountBalance")
+    userChoice1()
+  }
+  
 
   }
   
 
-/*fun deposit(var amount : Int){
+fun deposit(userChoice : Int){
+  println("Enter the amount you want to deposit, ")
+  var amount = readln().toInt()
+
+  while(userChoice == 2 && amount>accountBalance)
+  {
+    println("error amount is more than the credit balance of the account ")
+    println("Credit balance of the account is $accountBalance")
+    userChoice1()
+  }
+  if (userChoice==2 && amount<=accountBalance){
+    accountBalance= accountBalance - amount
+    println("$amount has been payed off")
+    println("Credit balance of the account is $accountBalance")
+    userChoice1()
+  } else {
   accountBalance += amount
   println("$amount deposited to the account")
   println("Account balance is $accountBalance")
+  userChoice1()
+  } 
+  
+
+  
 }
-*/
+
 
 
 
@@ -47,9 +97,9 @@ fun main(){
   println("The selected option is $userChoice, ")
 
   var accountType = when (userChoice){
-    1 -> "Debit account"
-    2 -> "Credit account"
-    3 -> "Checking account"
+    1 -> "Debit account" //In debit account the balance is the amount you can take out (balance can't be negative)
+    2 -> "Credit account" //In credit account the balance is the amount you have to pay (you can't pay more than the credit you owe)
+    3 -> "Checking account" //This is a normal account , balance can go negative
 
     else -> "error invalid input"
   } 
@@ -62,24 +112,8 @@ fun main(){
 
   println("Current account balance is $accountBalance")
   
-  do {
-    println("Please select the preferred option ")
-    println("1. Deposit money ")
-    println("2. Withdraw money ")
-    println("3. Exit")
-    println("Please select the operation ")
+  userChoice1()
   
-    var userChoice1 : Int = readln().toInt()
-  
-    println("The selected option is $userChoice1, ")
-  
-    when (userChoice1){
-      //1 -> deposit(accountType)
-      2 -> withdraw(userChoice)
-      
-    } 
-    }
-     while (userChoice1 !in 1..2 );
 
 
 
